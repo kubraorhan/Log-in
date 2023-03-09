@@ -4,16 +4,11 @@
  *
  * @format
  */
-
+  
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import { SafeAreaView,StyleSheet,Text} from 'react-native';
-import SignInScreen from './src/screens/SignInScreen/index';
-import SignUpScreen from './src/screens/SignUpScreen/index';
-import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen';
-import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
-import ResetPasswordScreen from './src/screens/ResetPasswordScreen';
-
+import Navigation from './src/navigation/index';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -27,8 +22,9 @@ function App(): JSX.Element {
       {/* <SignInScreen/> 
        <SignUpScreen/> 
       <ConfirmEmailScreen /> 
-      <ForgotPasswordScreen/>*/}
-      <ResetPasswordScreen/> 
+      <ForgotPasswordScreen/>
+      <ResetPasswordScreen/> */}
+      <Navigation/>
     </SafeAreaView>
   );
 }

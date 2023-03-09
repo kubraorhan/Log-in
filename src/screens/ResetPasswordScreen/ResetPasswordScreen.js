@@ -11,17 +11,21 @@ import React, {useState} from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
+import { useNavigation } from '@react-navigation/native';
+
 
 const ResetPasswordScreen = () => {
   const {code, setCode} = useState('');
   const {newPassword, setNewPassword} = useState('')
+  const navigation = useNavigation();
 
   const onSubmitPressed = () => {
-    console.warn('onSubmitPressed');
+    navigation.navigate('HomeScreen')
   };
 
   const onSigninPress = () => {
-    console.warn('Sign in');
+    navigation.navigate('SignInScreen')
+    
   };
 
   return (

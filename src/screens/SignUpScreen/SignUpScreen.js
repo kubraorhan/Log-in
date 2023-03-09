@@ -11,15 +11,17 @@ import React, {useState} from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
+import { useNavigation } from '@react-navigation/native';
+import {useForm} from 'react-hook-form'
 
 const SignUpScreen = () => {
-  const {username, setUsername} = useState('');
-  const [email, setEmail] = useState('');
-  const {password, setPassword} = useState('');
-  const {passwordRepeat, setPasswordRepeat} = useState('');
+  const {control, handleSubmit} = useForm();
+
+  const navigation = useNavigation();
 
   const onRegisterPressed = () => {
-    console.warn('onRegisterPressed');
+    navigation.navigate('ConfirmEmailScreen')
+
   };
   const onTermsOfUsePressed = () => {
     console.warn('onTermsOfUsePressed');
@@ -30,7 +32,8 @@ const SignUpScreen = () => {
   };
 
   const onSigninPress = () => {
-    console.warn('Sign in');
+    navigation.navigate('SignInScreen')
+
   };
 
   return (
@@ -39,28 +42,26 @@ const SignUpScreen = () => {
         <Text style={styles.title}>Create an account</Text>
 
         <CustomInput
+          name="username"
+          control={control}
+         // rules={{required:'Username is required'}}
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
           secureTextEntry={false}
         />
         <CustomInput
           placeholder="Email"
-          value={email}
-          setValue={setEmail}
+          control={control}
           secureTextEntry={false}
         />
 
         <CustomInput
           placeholder="Password"
-          value={password}
-          setValue={setPassword}
+          control={control}
           secureTextEntry={true}
         />
         <CustomInput
-          placeholder="Repeat Password"
-          value={passwordRepeat}
-          setValue={setPasswordRepeat}
+          placeholder="Repeat Password"       
+          control={control}
           secureTextEntry={true}
         />
 

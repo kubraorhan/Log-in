@@ -1,64 +1,94 @@
-import {View, Text, StyleSheet, Image, useWindowDimensions,ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  useWindowDimensions,
+  ScrollView,
+  TextInput,
+} from 'react-native';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/loremLogo.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
+import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
 
 const SignInScreen = () => {
-  const {username, setUsername} = useState('');
-  const {password, setPassword} = useState('');
   const {height} = useWindowDimensions();
+  const navigation = useNavigation();
 
-  const onSignInPressed = () => {
-    console.warn('Sign in');
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
+  const onSignInPressed = data => {
+    console.log(data);
+    navigation.navigate('HomeScreen');
   };
   const onForgotPasswordPressed = () => {
     console.warn('onForgotPasswordPressed');
+    navigation.navigate('ForgotPasswordScreen');
   };
-  
+
   const onSignUpPress = () => {
     console.warn('Sign Up');
+    navigation.navigate('SignUpScreen');
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator = {false}>
-    <View style={styles.root}>
-      <Image
-        source={Logo}
-        style={[styles.logo, {height: height * 0.3}]}
-        resizeMode="contain"
-      />
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.root}>
+        <Image
+          source={Logo}
+          style={[styles.logo, {height: height * 0.3}]}
+          resizeMode="contain"
+        />
 
-      <CustomInput
-        placeholder="Username"
-        value={username}
-        setValue={setUsername}
-        secureTextEntry={false}
-      />
-      <CustomInput
-        placeholder="Password"
-        value={password}
-        setValue={setPassword}
-        secureTextEntry={true}
-      />
-      <CustomButton text="Sign in" onPress={onSignInPressed}  type ="PRIMARY"/>
+        <CustomInput
+          name="username"
+          rules={{required: 'Username is required'}}
+          placeholder="Username"
+          secureTextEntry={false}
+          control={control}
+        />
+        <CustomInput
+          name="Password"
+          placeholder="Password"
+          control={control}
+          secureTextEntry={true}
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 5,
+              message: 'Password should be minimum 5 characters long.',
+            },
+          }}
+        />
 
-      <CustomButton
-        text="Forgot password"
-        onPress={onForgotPasswordPressed}
-        type="TERTIARY"
-      />
-    
-      <SocialSignInButtons/>
+        <CustomButton
+          text="Sign in"
+          onPress={handleSubmit(onSignInPressed)}
+          type="PRIMARY"
+        />
 
-      <CustomButton
-        text="Do not have any account? Create one "
-        onPress={onSignUpPress}
-        type="TERTIARY"
-      />
+        <CustomButton
+          text="Forgot password"
+          onPress={onForgotPasswordPressed}
+          type="TERTIARY"
+        />
 
-    </View> 
+        <SocialSignInButtons />
+
+        <CustomButton
+          text="Do not have any account? Create one "
+          onPress={onSignUpPress}
+          type="TERTIARY"
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -74,8 +104,7 @@ const styles = StyleSheet.create({
     maxWidth: 160,
     maxHeight: 160,
     borderRadius: 100,
-    marginBottom:25,
-
+    marginBottom: 25,
   },
 });
 

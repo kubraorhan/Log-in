@@ -11,16 +11,20 @@ import {
   import CustomInput from '../../components/CustomInput';
   import CustomButton from '../../components/CustomButton';
   import SocialSignInButtons from '../../components/SocialSignInButtons';
+  import { useNavigation } from '@react-navigation/native';
   
+
   const ConfirmEmailScreen = () => {
     const {code, setCode} = useState('');
+    const navigation = useNavigation();
+
   
     const onConfirmPressed = () => {
-      console.warn('onConfirmPressed');
+      navigation.navigate('Home')
     };
   
     const onSigninPress = () => {
-      console.warn('Sign in');
+      navigation.navigate('SignInScreen')
     };
     
     const onResendPress = () => {
