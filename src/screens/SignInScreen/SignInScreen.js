@@ -50,23 +50,20 @@ const SignInScreen = () => {
 
         <CustomInput
           name="username"
-          rules={{required: 'Username is required'}}
+          control={control}
+          rules={{if(onSigninPress){{required: 'Username is required'}}}}
           placeholder="Username"
           secureTextEntry={false}
-          control={control}
         />
         <CustomInput
           name="Password"
           placeholder="Password"
           control={control}
           secureTextEntry={true}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 5,
-              message: 'Password should be minimum 5 characters long.',
-            },
-          }}
+          rules={{if(onSigninPress) {
+            {required: 'Password is required',
+            {minLength: { value: 5 ,message: 'Password should be minimum 5 characters long.'}}
+          }}}}
         />
 
         <CustomButton
@@ -77,7 +74,7 @@ const SignInScreen = () => {
 
         <CustomButton
           text="Forgot password"
-          onPress={onForgotPasswordPressed}
+          onPress={handleSubmit(onForgotPasswordPressed)}
           type="TERTIARY"
         />
 
@@ -85,7 +82,7 @@ const SignInScreen = () => {
 
         <CustomButton
           text="Do not have any account? Create one "
-          onPress={onSignUpPress}
+          onPress={handleSubmit(onSignUpPress)}
           type="TERTIARY"
         />
       </View>
@@ -102,7 +99,7 @@ const styles = StyleSheet.create({
   logo: {
     width: '100%',
     maxWidth: 160,
-    maxHeight: 160,
+    maxHeight: 160, 
     borderRadius: 100,
     marginBottom: 25,
   },

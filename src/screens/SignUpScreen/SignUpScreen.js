@@ -44,22 +44,30 @@ const SignUpScreen = () => {
         <CustomInput
           name="username"
           control={control}
-         // rules={{required:'Username is required'}}
+          rules={{required:'Username is required'}}
           placeholder="Username"
           secureTextEntry={false}
         />
         <CustomInput
+          name="email"
           placeholder="Email"
           control={control}
           secureTextEntry={false}
         />
 
         <CustomInput
+          name="password"
           placeholder="Password"
+          rules={{required:'Password is required', 
+          minLength:{
+            value:5, 
+            message :'Password should be minimum 5 characters long.'}}}
           control={control}
           secureTextEntry={true}
         />
+        
         <CustomInput
+          name="password-repeat"
           placeholder="Repeat Password"       
           control={control}
           secureTextEntry={true}
@@ -67,21 +75,21 @@ const SignUpScreen = () => {
 
         <CustomButton
           text="Register"
-          onPress={onRegisterPressed}
+          onPress={handleSubmit(onRegisterPressed)} 
           type="PRIMARY"
         />
 
         <Text style={styles.text}>
           By registering, you confirm that you accept our{' '}
-          <Text style={styles.link} onPress = {onTermsOfUsePressed} >Terms of Use </Text> and{' '}
-          <Text style={styles.link} onPress = {onPrivacyPolicyPressed} >Privacy Policy</Text>.
+          <Text style={styles.link} onPress = {handleSubmit(onTermsOfUsePressed)} >Terms of Use </Text> and{' '}
+          <Text style={styles.link} onPress = {handleSubmit(onPrivacyPolicyPressed)} >Privacy Policy</Text>.
         </Text>
 
         <SocialSignInButtons/>
 
         <CustomButton
         text="Have an account? Sign in."
-        onPress={onSigninPress}
+        onPress={handleSubmit(onSigninPress)}
         type="TERTIARY"
       />
 
@@ -104,7 +112,7 @@ const styles = StyleSheet.create({
     marginBottom:20
   },
   text: {
-    color: 'Gray',
+    color: '#808080',
     marginVertical: 10,
   },
   link: {

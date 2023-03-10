@@ -1,8 +1,11 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import CustomButton from "../CustomButton/index";
+import {useForm} from 'react-hook-form'
 
 const SocialSignInButtons = () => {
+
+  const {handleSubmit} = useForm();
     const onSignInFacebook =() => {
         console.warn('onSignInFacebook');
       }
@@ -17,21 +20,21 @@ const SocialSignInButtons = () => {
     <>
         <CustomButton
         text= "Sign in with Facebook"
-        onPress={onSignInFacebook}
+        onPress={handleSubmit(onSignInFacebook)}
         bgColor = "#E7EAF4"
         fgColor= "#4765A9"
       />
 
       <CustomButton
         text= "Sign in with Google"
-        onPress={onSignInGoogle}
+        onPress={handleSubmit(onSignInGoogle)}
         bgColor = "#FAE9EA"
         fgColor= "#DD4D44"
       />
 
       <CustomButton
         text= "Sign in with Apple"
-        onPress={onSignInApple}
+        onPress={handleSubmit(onSignInApple)}
         bgColor = "#e3e3e3"
         fgColor= "#363636"
       />
