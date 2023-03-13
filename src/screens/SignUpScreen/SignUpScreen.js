@@ -14,9 +14,11 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 import { useNavigation } from '@react-navigation/native';
 import {useForm} from 'react-hook-form'
 
-const SignUpScreen = () => {
-  const {control, handleSubmit} = useForm();
+const EMAIL_REGEX =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
+const SignUpScreen = () => {
+  const {control, handleSubmit, watch} = useForm();
+  const pwd = watch('password')
   const navigation = useNavigation();
 
   const onRegisterPressed = () => {
@@ -44,7 +46,7 @@ const SignUpScreen = () => {
         <CustomInput
           name="username"
           control={control}
-          rules={{required:'Username is required'}}
+          rules={{if(onRegisterPressed){required:'Username is required'}}}
           placeholder="Username"
           secureTextEntry={false}
         />
@@ -52,16 +54,22 @@ const SignUpScreen = () => {
           name="email"
           placeholder="Email"
           control={control}
+          rules={{pattern: EMAIL_REGEX}}
           secureTextEntry={false}
         />
 
         <CustomInput
           name="password"
           placeholder="Password"
-          rules={{required:'Password is required', 
-          minLength:{
+          rules={{if(onRegisterPressed){required:'Password is required', 
+          {minLength:{
             value:5, 
-            message :'Password should be minimum 5 characters long.'}}}
+            message :'Password should be minimum 5 characters long.'}},
+          {maxLength:{
+            value:20,
+            message :'Password should be max 20 characters long.'
+          }}
+          }}}
           control={control}
           secureTextEntry={true}
         />
@@ -71,6 +79,9 @@ const SignUpScreen = () => {
           placeholder="Repeat Password"       
           control={control}
           secureTextEntry={true}
+          rules= {{
+            validate: value => value === pwd ||'Password do not match.'
+          }}
         />
 
         <CustomButton

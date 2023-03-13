@@ -30,12 +30,10 @@ const SignInScreen = () => {
     navigation.navigate('HomeScreen');
   };
   const onForgotPasswordPressed = () => {
-    console.warn('onForgotPasswordPressed');
     navigation.navigate('ForgotPasswordScreen');
   };
 
-  const onSignUpPress = () => {
-    console.warn('Sign Up');
+  const onSignUpPressed = () => {
     navigation.navigate('SignUpScreen');
   };
 
@@ -51,7 +49,7 @@ const SignInScreen = () => {
         <CustomInput
           name="username"
           control={control}
-          rules={{if(onSigninPress){{required: 'Username is required'}}}}
+          rules={{if(onSignInPressed) {{{required: 'Username is required'}}}}}
           placeholder="Username"
           secureTextEntry={false}
         />
@@ -60,7 +58,7 @@ const SignInScreen = () => {
           placeholder="Password"
           control={control}
           secureTextEntry={true}
-          rules={{if(onSigninPress) {
+          rules={{if(onSignInPressed) {
             {required: 'Password is required',
             {minLength: { value: 5 ,message: 'Password should be minimum 5 characters long.'}}
           }}}}
@@ -82,7 +80,7 @@ const SignInScreen = () => {
 
         <CustomButton
           text="Do not have any account? Create one "
-          onPress={handleSubmit(onSignUpPress)}
+          onPress={handleSubmit(onSignUpPressed)}
           type="TERTIARY"
         />
       </View>
