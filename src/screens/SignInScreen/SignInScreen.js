@@ -20,7 +20,7 @@ const SignInScreen = () => {
   const navigation = useNavigation();
 
   const {
-    control,
+    control,       
     handleSubmit,
     formState: {errors},
   } = useForm();

@@ -26,9 +26,9 @@ const SignUpScreen = () => {
 
   };
   const onTermsOfUsePressed = () => {
-    console.warn('onTermsOfUsePressed');
+    console.warn('onTermsOfUsePressed');  
   };
-
+         
   const onPrivacyPolicyPressed = () => {
     console.warn('onPrivacyPolicyPressed');
   };
