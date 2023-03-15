@@ -13,17 +13,19 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
+        classpath("com.android.tools.build:gradle:7.5.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath 'com.google.gms:google-services:4.3.15'
     }
-    allprojects {
-  ...
-      repositories {
-         google()  
-         mavenCentral()  
+     allprojects {
+        repositories {
+            jcenter()
+            google()  // Google's Maven repository
+            mavenCentral()  // Maven Central repository
 
-  }
-}
+        }
+     }}
+

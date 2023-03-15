@@ -12,11 +12,11 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 
 const ResetPasswordScreen = () => {
-  const {code, setCode} = useState('');
-  const {newPassword, setNewPassword} = useState('')
+  const {control,handleSubmit}= useForm();
   const navigation = useNavigation();
 
   const onSubmitPressed = () => {
@@ -35,23 +35,21 @@ const ResetPasswordScreen = () => {
 
         <CustomInput
           placeholder="Enter your confirmation code"
-          value={code}
-          setValue={setCode}
+          control={control}
           secureTextEntry={false}
         />
    
         <CustomInput
           placeholder="Enter your new password"
-          value={newPassword}
-          setValue={setNewPassword}
+          control={control}
           secureTextEntry={false}   
         />
 
-        <CustomButton text="Submit" onPress={onSubmitPressed} type="PRIMARY" />
+        <CustomButton text="Submit" onPress={handleSubmit(onSubmitPressed)} type="PRIMARY" />
 
         <CustomButton
           text="Back to sign in."
-          onPress={onSigninPress}
+          onPress={handleSubmit(onSigninPress)}
           type="TERTIARY"
         />
       </View>

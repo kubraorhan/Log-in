@@ -28,7 +28,7 @@ const SignInScreen = () => {
   const onSignInPressed = data => {
     console.log(data);
     navigation.navigate('HomeScreen');
-  };
+  };  
   const onForgotPasswordPressed = () => {
     navigation.navigate('ForgotPasswordScreen');
   };

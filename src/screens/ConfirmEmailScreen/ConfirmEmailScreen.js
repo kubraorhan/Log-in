@@ -12,12 +12,12 @@ import {
   import CustomButton from '../../components/CustomButton';
   import SocialSignInButtons from '../../components/SocialSignInButtons';
   import { useNavigation } from '@react-navigation/native';
+  import { useForm } from 'react-hook-form';
   
 
   const ConfirmEmailScreen = () => {
-    const {code, setCode} = useState('');
     const navigation = useNavigation();
-
+    const {control , handleSubmit} = useForm();
   
     const onConfirmPressed = () => {
       navigation.navigate('Home')
@@ -37,26 +37,25 @@ import {
   
           <CustomInput
             placeholder="Enter your confirm code"
-            value={code}
-            setValue={setCode}
+            control={control}
             secureTextEntry={true}
           />
     
           <CustomButton
             text="Confirm"
-            onPress={onConfirmPressed}
+            onPress={handleSubmit( onConfirmPressed)}
             type="PRIMARY"   
           />
   
         <CustomButton
           text="Resend code."
-          onPress={onResendPress}
+          onPress={handleSubmit(onResendPress)}
           type="SECONDARY"
         /> 
 
           <CustomButton
           text="Back to sign in."
-          onPress={onSigninPress}
+          onPress={handleSubmit(onSigninPress)}
           type="TERTIARY"
         />
   

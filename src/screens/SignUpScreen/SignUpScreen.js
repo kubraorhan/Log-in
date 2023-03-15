@@ -14,7 +14,7 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 import { useNavigation } from '@react-navigation/native';
 import {useForm} from 'react-hook-form'
 
-const EMAIL_REGEX =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const EMAIL_REGEX = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const SignUpScreen = () => {
   const {control, handleSubmit, watch} = useForm();
@@ -37,7 +37,7 @@ const SignUpScreen = () => {
     navigation.navigate('SignInScreen')
 
   };
-
+  
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
